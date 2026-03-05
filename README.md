@@ -76,17 +76,16 @@ Ec2 Website
 
 📂 Project Structure
 .
+
 ├── main.tf
 ├── var.tf
 ├── output.tf
 │
-
 ├── modules/
 │   ├── vpc
 │   ├── subnet
 │   └── acm_certificate
 │
-
 ├── RAG_Documents/
 │
 ├── lambda_function.py
