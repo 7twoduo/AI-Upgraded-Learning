@@ -1,11 +1,11 @@
 <div align="center">
 
-# ⚔️ Bedrock RAG Chat System — Terraform + CloudFront + Edge Security
+# ⚔️ Bedrock RAG Chat System — Terraform + CloudFront + Edge Content Delivery
 
 **Production-minded RAG pipeline:** S3 docs → S3 Vectors → Bedrock Knowledge Base → Lambda Chat API → (Optional) Website Hosting
 
 <!-- Replace with your own banner image/gif -->
-<img src="YOUR_BANNER_IMAGE_OR_GIF_HERE" width="900" />
+
 
 <br/>
 
