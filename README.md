@@ -42,17 +42,19 @@
 
 # 🚀 What This Project Builds
 
-This repository provisions a **Retrieval Augmented Generation (RAG) system on AWS** entirely with **Terraform**.
+This project deploys a complete Retrieval Augmented Generation (RAG) system using Infrastructure as Code.
 
-It automatically deploys:
+It automatically provisions:
 
-- 📄 **S3 document storage**
-- 🧠 **Bedrock Knowledge Base**
-- 🧬 **S3 Vectors vector database**
-- ⚡ **Lambda chat engine**
-- 🌐 **API Gateway `/chat` endpoint**
-- ☁️ **Optional website hosting**
-
+Component	Description
+📄 S3 Document Storage	Upload knowledge base documents
+🧠 Bedrock Knowledge Base	AI retrieval system
+🧬 S3 Vector Database	Vector embeddings storage
+⚡ Lambda Chat Engine	Handles prompts + model responses
+🌐 API Gateway	Public /chat endpoint
+☁️ CloudFront CDN	Optional global frontend hosting
+🔐 IAM Roles	Secure model and storage access
+🌎 VPC + Subnets	Isolated infrastructure
 ---
 
 # 🧠 RAG Architecture
@@ -74,6 +76,11 @@ Lambda --> API[API Gateway /chat]
 
 API --> Client[Website or Client App]
 
+🧠 System Architecture
+
+<img width="2470" height="129" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/2068f9fa-592b-4f58-a430-ec34b8177acd" />
+
+
 Hosting Options
 
 S3 + Cloudfront
@@ -86,12 +93,16 @@ Ec2 Website
 
 
 
-📁 Repository Layout
+📂 Project Structure
 .
 ├── main.tf
 ├── var.tf
 ├── output.tf
+│
 ├── modules/
+│   ├── vpc
+│   ├── subnet
+│   └── acm_certificate
 │
 ├── RAG_Documents/
 │
@@ -100,17 +111,8 @@ Ec2 Website
 │
 └── index.html
 
-⚙️ Infrastructure Components
-Component	Purpose
-S3 Bucket	Stores RAG documents
-S3 Vectors	Vector database for embeddings
-Bedrock KB	Knowledge base retrieval
-Lambda	Chat processing
-API Gateway	Public /chat endpoint
-CloudFront	Edge CDN for frontend
-Route53	DNS management
-VPC	Network isolation
-IAM	Access control
+
+
 🧩 Key Features
 
 ✔ Upload local documents automatically
@@ -136,86 +138,71 @@ https://YOUR_API_URL/chat \
 -H "Content-Type: application/json" \
 -d '{"message":"Explain my documents"}'
 
-🔐 Security Notes
+🧩 RAG Pipeline
 
-The project currently includes:
+1️⃣ Upload documents
+2️⃣ Terraform uploads them to S3
+3️⃣ Documents are embedded using Bedrock Titan embeddings
+4️⃣ Stored inside S3 Vectors
+5️⃣ Queries retrieve context from vectors
+6️⃣ Claude generates final response
 
-IAM roles for Lambda + Bedrock
+<img width="2502" height="1206" alt="22222" src="https://github.com/user-attachments/assets/92f895f1-a6c4-494a-8a45-60eeeaed519d" />
 
-API Gateway throttling
 
-CloudFront Origin Access Control
+🔐 Security Model
 
-Private subnets for internal components
+The infrastructure implements several AWS security practices:
 
-Future improvements could include:
+✔ IAM least-privilege roles
+✔ Private networking using VPC
+✔ API Gateway throttling
+✔ CloudFront Origin Access Control
+✔ No public access to vector storage
 
-WAF
+Future improvements:
+
+AWS WAF
 
 Cognito authentication
 
 request validation
 
-tighter IAM policies
+encrypted secrets rotation
 
-Quick start
+
+
+## Quick start
 
 1) Pre-reqs
 
-Terraform ~> 1.14.5
-
-AWS provider 6.33.0
-
-AWS CLI installed + authenticated
-
-Backend bucket already exists: backend-extra-unique-1
-
-Important notes (read this)
-
-Backend state bucket must exist before terraform init
-
-Bedrock model access must be enabled in your account
-
-Ingestion runs via local-exec, so AWS CLI permissions matter
-
-Some resources use a 30s sleep to reduce race conditions
-
-Security upgrades (next)
-
-If you want this “real production”:
-
-lock down IAM (remove broad "*" resources)
-
-restrict CORS to your domain
-
-add auth (Cognito/JWT) to API Gateway
-
-add WAF (CloudFront / API Gateway)
-
-enable access logs + alarms
+Terraform ~> 1.14.5  | AWS provider 6.33.0  | AWS CLI installed + authenticated  | Backend bucket already exists: backend-extra-unique-1
 
 
-📊 Deployment Flow
+🎬 Animated Footer: Working Demo
+     
+
+
+
 🎯 Why This Project Matters
 
-This project demonstrates real-world DevOps + AI infrastructure skills:
+This project demonstrates real-world cloud engineering skills:
 
 Infrastructure as Code
 
-AI systems architecture
+AI system architecture
 
-Bedrock integration
+serverless backends
 
-Serverless backend design
+secure cloud networking
 
-edge hosting
+vector databases
 
-observability patterns
+production deployment patterns
+
+This type of architecture is used by modern AI SaaS platforms.
 
 🧑‍💻 Author
 
-Terraform + AWS AI infrastructure project.
-
-Built as a production-style learning environment for RAG systems.
-
+Built as a production-style AI infrastructure project using Terraform and AWS.
 
