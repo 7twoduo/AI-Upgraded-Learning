@@ -656,7 +656,7 @@ EOF
 variable "second_option" {
   description = "To enable Ec2 hosting turn the default to true below"
   type = bool
-  default = true
+  default = false
 }
 
 
