@@ -272,6 +272,69 @@ This type of architecture is used by modern AI SaaS platforms.
 **Decision:** Use **Terraform** to provision all infrastructure.  
 **Reason:** Infrastructure as Code allows repeatable deployments, version control, and makes the system easier to maintain and reproduce.
 
+## ▶️ How to Run
+
+1. **Update the Terraform backend**
+
+Replace the S3 backend with a bucket you own.
+
+
+terraform {
+backend "s3" {
+bucket = "YOUR_BACKEND_BUCKET"
+key = "terraform.tfstate"
+region = "us-east-1"
+}
+}
+
+
+---
+
+2. **Update domain variables**
+
+In `terraform.tfvars` (or variables):
+
+
+registered_domain = "yourdomain.com"
+root_domain_name = "yourdomain.com"
+
+
+---
+
+3. **Make resources unique**
+
+Some resources (like S3 buckets) must be globally unique.  
+If Terraform fails, update names to something unique for your account.
+
+---
+
+4. **Deploy the infrastructure**
+
+
+terraform init
+terraform apply
+
+
+---
+
+5. **Copy the API Gateway Invoke URL**
+
+After deployment, copy the **Invoke URL**.
+
+Example:
+
+
+https://xxxx.execute-api.us-east-1.amazonaws.com/prod
+
+
+---
+
+6. **Use the AI**
+
+Go to your domain (CloudFront site), paste the **Invoke URL**, and start asking questions.
+
+The AI knowledge base is built from **AWS Security Specialty** material stored in `RAG_Documents/`.
+
 ## 🧑‍💻 Author
 
 Built as a **production-inspired cloud architecture project** using Terraform and AWS.
