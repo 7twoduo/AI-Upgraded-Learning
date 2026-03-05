@@ -77,7 +77,8 @@ API --> Client[Website or Client App]
 Hosting Options
 
 S3 + Cloudfront
-<img width="1802" height="1206" alt="mermaid-diagram (1)" src="https://github.com/user-attachments/assets/ed5a01c3-cf80-4bc2-849e-2235336732ad" />
+<img width="1332" height="366" alt="saase" src="https://github.com/user-attachments/assets/2332478b-a86d-47cc-b71f-f22ccf3c66de" />
+
 
     &
 Ec2 Website
