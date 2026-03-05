@@ -15,7 +15,12 @@
 ![Edge Security](https://img.shields.io/badge/Edge%20Security-0B1220?style=for-the-badge)
 ![Bedrock](https://img.shields.io/badge/Bedrock-00A1C9?style=for-the-badge&logo=amazonaws&logoColor=white)
 ![Observability](https://img.shields.io/badge/Observability-22C55E?style=for-the-badge)
-
+![AWS](https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws)
+![Terraform](https://img.shields.io/badge/Terraform-1.14+-purple?style=for-the-badge&logo=terraform)
+![CloudFront](https://img.shields.io/badge/CloudFront-Edge%20CDN-blue?style=for-the-badge)
+![Bedrock](https://img.shields.io/badge/Amazon-Bedrock-green?style=for-the-badge)
+![Observability](https://img.shields.io/badge/Observability-CloudWatch-yellow?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Production%20Style-success?style=for-the-badge)
 </div>
 
 ---
@@ -48,7 +53,9 @@ flowchart LR
 
 Hosting Options
 
-<img width="1420" height="207" alt="image" src="https://github.com/user-attachments/assets/6a090638-e99a-4e1e-816b-71fb5f7f6fc6" />
+S3 + Cloudfront
+    &
+Ec2 Website
 
 
 
@@ -74,10 +81,31 @@ AWS CLI installed + authenticated
 
 Backend bucket already exists: backend-extra-unique-1
 
-### Send me the images you want embedded
-To match your screenshots exactly, send:
-1) Your **banner** image (top header look)  
-2) Any **GIFs** you want (deploy demo, chat demo)  
-3) Any **icons/badges** you want included (HIPAA/ISO/etc. style tags)
+Important notes (read this)
 
-And tell me the repo name + domain you want shown, and I’ll wire it in cleanly (and make the badge rows match your style).
+Backend state bucket must exist before terraform init
+
+Bedrock model access must be enabled in your account
+
+Ingestion runs via local-exec, so AWS CLI permissions matter
+
+Some resources use a 30s sleep to reduce race conditions
+
+Security upgrades (next)
+
+If you want this “real production”:
+
+lock down IAM (remove broad "*" resources)
+
+restrict CORS to your domain
+
+add auth (Cognito/JWT) to API Gateway
+
+add WAF (CloudFront / API Gateway)
+
+enable access logs + alarms
+
+
+
+
+
