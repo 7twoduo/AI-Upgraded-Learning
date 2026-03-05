@@ -84,8 +84,7 @@ API --> Client[Website or Client App]
 Hosting Options
 
 S3 + Cloudfront
-<img width="1332" height="366" alt="saase" src="https://github.com/user-attachments/assets/2332478b-a86d-47cc-b71f-f22ccf3c66de" />
-
+<img width="1536" height="1024" alt="ChatGPT Image Mar 5, 2026, 02_46_18 AM" src="https://github.com/user-attachments/assets/f3e9f930-64bd-44f0-b122-f15853d5d8b3" />
 
     &
 Ec2 Website
