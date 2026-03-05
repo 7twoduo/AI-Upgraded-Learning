@@ -40,16 +40,38 @@
 
 ## Architecture (visual)
 
-### RAG Flow
+# 🚀 What This Project Builds
+
+This repository provisions a **Retrieval Augmented Generation (RAG) system on AWS** entirely with **Terraform**.
+
+It automatically deploys:
+
+- 📄 **S3 document storage**
+- 🧠 **Bedrock Knowledge Base**
+- 🧬 **S3 Vectors vector database**
+- ⚡ **Lambda chat engine**
+- 🌐 **API Gateway `/chat` endpoint**
+- ☁️ **Optional website hosting**
+
+---
+
+# 🧠 RAG Architecture
+
 ```mermaid
 flowchart LR
-  A[RAG_Documents/] -->|Terraform uploads| B[(S3 Docs Bucket)]
-  B --> C[S3 Vectors VectorBucket]
-  C --> D[S3 Vectors Index]
-  D --> E[Bedrock Knowledge Base]
-  E --> F[Lambda Chat Handler]
-  F --> G[API Gateway /chat]
-  G --> H[Frontend]
+
+Docs[RAG Documents] --> S3[(S3 Document Bucket)]
+
+S3 --> Vectors[S3 Vectors]
+Vectors --> Index[Vector Index]
+
+Index --> KB[Bedrock Knowledge Base]
+
+KB --> Lambda[Lambda Chat Handler]
+
+Lambda --> API[API Gateway /chat]
+
+API --> Client[Website or Client App]
 
 Hosting Options
 
@@ -59,16 +81,72 @@ Ec2 Website
 
 
 
-Repo layout
+📁 Repository Layout
 .
 ├── main.tf
 ├── var.tf
 ├── output.tf
 ├── modules/
+│
 ├── RAG_Documents/
-├── index.html
+│
 ├── lambda_function.py
-└── lambda.zip
+├── lambda.zip
+│
+└── index.html
+
+⚙️ Infrastructure Components
+Component	Purpose
+S3 Bucket	Stores RAG documents
+S3 Vectors	Vector database for embeddings
+Bedrock KB	Knowledge base retrieval
+Lambda	Chat processing
+API Gateway	Public /chat endpoint
+CloudFront	Edge CDN for frontend
+Route53	DNS management
+VPC	Network isolation
+IAM	Access control
+🧩 Key Features
+
+✔ Upload local documents automatically
+✔ Vectorize documents using Titan embeddings
+✔ Query with Claude via Bedrock
+✔ Fully automated Terraform deployment
+✔ Optional CloudFront production hosting
+
+⚡ Quick Deploy
+1️⃣ Initialize Terraform
+terraform init
+2️⃣ Plan Infrastructure
+terraform plan
+3️⃣ Deploy
+terraform apply
+🧪 Test the Chat API
+curl -X POST \
+https://YOUR_API_URL/chat \
+-H "Content-Type: application/json" \
+-d '{"message":"Explain my documents"}'
+🔐 Security Notes
+
+The project currently includes:
+
+IAM roles for Lambda + Bedrock
+
+API Gateway throttling
+
+CloudFront Origin Access Control
+
+Private subnets for internal components
+
+Future improvements could include:
+
+WAF
+
+Cognito authentication
+
+request validation
+
+tighter IAM policies
 
 Quick start
 1) Pre-reqs
@@ -106,6 +184,27 @@ add WAF (CloudFront / API Gateway)
 enable access logs + alarms
 
 
+📊 Deployment Flow
+🎯 Why This Project Matters
 
+This project demonstrates real-world DevOps + AI infrastructure skills:
+
+Infrastructure as Code
+
+AI systems architecture
+
+Bedrock integration
+
+Serverless backend design
+
+edge hosting
+
+observability patterns
+
+🧑‍💻 Author
+
+Terraform + AWS AI infrastructure project.
+
+Built as a production-style learning environment for RAG systems.
 
 
