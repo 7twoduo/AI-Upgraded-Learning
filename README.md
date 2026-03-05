@@ -12,14 +12,14 @@
 ![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white)
 ![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
 ![CloudFront](https://img.shields.io/badge/CloudFront-FF9900?style=for-the-badge&logo=amazonaws&logoColor=black)
-![Edge Security](https://img.shields.io/badge/Edge%20Security-0B1220?style=for-the-badge)
+![CDN](https://img.shields.io/badge/Edge%20Security-0B1220?style=for-the-badge)
 ![Bedrock](https://img.shields.io/badge/Bedrock-00A1C9?style=for-the-badge&logo=amazonaws&logoColor=white)
-![Observability](https://img.shields.io/badge/Observability-22C55E?style=for-the-badge)
+![AI](https://img.shields.io/badge/Observability-22C55E?style=for-the-badge)
 ![AWS](https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws)
 ![Terraform](https://img.shields.io/badge/Terraform-1.14+-purple?style=for-the-badge&logo=terraform)
 ![CloudFront](https://img.shields.io/badge/CloudFront-Edge%20CDN-blue?style=for-the-badge)
 ![Bedrock](https://img.shields.io/badge/Amazon-Bedrock-green?style=for-the-badge)
-![Observability](https://img.shields.io/badge/Observability-CloudWatch-yellow?style=for-the-badge)
+![Database](https://img.shields.io/badge/Observability-CloudWatch-yellow?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Production%20Style-success?style=for-the-badge)
 </div>
 
@@ -204,6 +204,73 @@ vector databases
 production deployment patterns
 
 This type of architecture is used by modern AI SaaS platforms.
+
+
+## ⚠️ Problems Encountered and Solutions
+
+### 1. Limited Documentation for S3 Vectors + Bedrock Knowledge Base
+**Problem:** AWS documentation for creating a Bedrock Knowledge Base with **S3 Vectors** through Terraform is very limited and fragmented.  
+**Solution:** Used AI-assisted research to quickly gather the required documentation and reconstruct the full deployment flow (Vector Bucket → Index → Knowledge Base → Data Source → Ingestion).
+
+---
+
+### 2. Race Conditions During Terraform Deployment
+**Problem:** Some AWS resources were not fully available when Terraform attempted to create dependent resources, causing intermittent failures.  
+**Solution:** Added a Terraform `time_sleep` resource to ensure the vector bucket, index, and IAM roles were fully initialized before creating the Knowledge Base.
+
+---
+
+### 3. CloudFront + ACM + Route53 Dependency Conflict
+**Problem:** ACM certificate validation created duplicate Route53 records which prevented the domain from resolving correctly.  
+**Solution:** Removed the incorrect DNS records and adjusted the Terraform dependency flow so the certificate validates before CloudFront is deployed.
+
+---
+
+### 4. Bedrock Ingestion Job Not Supported by Terraform
+**Problem:** Terraform does not currently support triggering Bedrock ingestion jobs as a native resource.  
+**Solution:** Used a `local-exec` provisioner to run the AWS CLI command that starts the ingestion process after the Knowledge Base and data source are created.
+
+---
+
+### 5. CORS Errors Between Frontend and API Gateway
+**Problem:** Browser requests to the `/chat` endpoint failed because API Gateway did not handle preflight requests.  
+**Solution:** Added an `OPTIONS` method and configured `Access-Control-Allow-*` headers so the frontend can communicate with the API.
+
+## 🧠 Architecture Decisions
+
+### Vector Database: S3 Vectors instead of Pinecone or OpenSearch
+**Decision:** Use **AWS S3 Vectors** as the vector storage backend.  
+**Reason:** It integrates directly with **Bedrock Knowledge Bases**, removes the need to manage external vector databases, and keeps the entire system inside AWS for simpler security and networking.
+
+---
+
+### Serverless Compute: Lambda instead of Containers
+**Decision:** Use **AWS Lambda** for the chat backend.  
+**Reason:** Lambda removes infrastructure management, scales automatically, and is well suited for request-driven workloads like API-based chat interactions.
+
+---
+
+### API Layer: API Gateway instead of ALB
+**Decision:** Use **API Gateway** to expose the `/chat` endpoint.  
+**Reason:** API Gateway integrates natively with Lambda, supports throttling, request validation, and authentication features that are useful for AI APIs.
+
+---
+
+### Document Storage: S3 instead of Database Storage
+**Decision:** Store knowledge documents in **S3**.  
+**Reason:** S3 is durable, inexpensive, and integrates directly with Bedrock Knowledge Bases and ingestion pipelines.
+
+---
+
+### Frontend Hosting: CloudFront + S3 instead of EC2
+**Decision:** Host the frontend using **CloudFront with an S3 static site**.  
+**Reason:** This provides global CDN performance, better security, and lower cost compared to running a web server on EC2.
+
+---
+
+### Infrastructure Management: Terraform instead of manual deployment
+**Decision:** Use **Terraform** to provision all infrastructure.  
+**Reason:** Infrastructure as Code allows repeatable deployments, version control, and makes the system easier to maintain and reproduce.
 
 🧑‍💻 Author
 
