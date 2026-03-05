@@ -38,25 +38,6 @@
 
 ---
 
-## Architecture (visual)
-
-# 🚀 What This Project Builds
-
-This project deploys a complete Retrieval Augmented Generation (RAG) system using Infrastructure as Code.
-
-It automatically provisions:
-
-Component	Description
-📄 S3 Document Storage	Upload knowledge base documents
-🧠 Bedrock Knowledge Base	AI retrieval system
-🧬 S3 Vector Database	Vector embeddings storage
-⚡ Lambda Chat Engine	Handles prompts + model responses
-🌐 API Gateway	Public /chat endpoint
-☁️ CloudFront CDN	Optional global frontend hosting
-🔐 IAM Roles	Secure model and storage access
-🌎 VPC + Subnets	Isolated infrastructure
----
-
 # 🧠 RAG Architecture
 
 <img width="1802" height="1206" alt="mermaid-diagram (1)" src="https://github.com/user-attachments/assets/d039dd1b-d33b-4735-a3ae-b762477e3f28" />
