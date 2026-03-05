@@ -80,11 +80,13 @@ Ec2 Website
 ├── var.tf
 ├── output.tf
 │
+
 ├── modules/
 │   ├── vpc
 │   ├── subnet
 │   └── acm_certificate
 │
+
 ├── RAG_Documents/
 │
 ├── lambda_function.py
