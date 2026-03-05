@@ -179,8 +179,11 @@ encrypted secrets rotation
 Terraform ~> 1.14.5  | AWS provider 6.33.0  | AWS CLI installed + authenticated  | Backend bucket already exists: backend-extra-unique-1
 
 
-🎬 Animated Footer: Working Demo
+🎬 Animated Footer: Working Demo on Topic
      
+https://github.com/user-attachments/assets/2a94670d-3471-4304-9750-13332952fb12
+
+🎬 Animated Footer: Not Working Demo On Non Topic
 
 
 
