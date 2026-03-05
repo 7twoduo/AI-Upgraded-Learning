@@ -57,7 +57,8 @@ It automatically deploys:
 
 # 🧠 RAG Architecture
 
-```mermaid
+<img width="1802" height="1206" alt="mermaid-diagram (1)" src="https://github.com/user-attachments/assets/d039dd1b-d33b-4735-a3ae-b762477e3f28" />
+
 flowchart LR
 
 Docs[RAG Documents] --> S3[(S3 Document Bucket)]
