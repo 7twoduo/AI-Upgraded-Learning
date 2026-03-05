@@ -88,7 +88,8 @@ S3 + Cloudfront
 
     &
 Ec2 Website
-<img width="1652" height="129" alt="mermaid-diagram (3)" src="https://github.com/user-attachments/assets/e1166311-a0c7-4ac2-a182-750ac09a20ec" />
+<img width="1536" height="1024" alt="ec2 sssafaf" src="https://github.com/user-attachments/assets/3dbe8cc0-7822-445b-9f5a-0cbcc5733919" />
+
 
 
 
@@ -271,7 +272,19 @@ This type of architecture is used by modern AI SaaS platforms.
 **Decision:** Use **Terraform** to provision all infrastructure.  
 **Reason:** Infrastructure as Code allows repeatable deployments, version control, and makes the system easier to maintain and reproduce.
 
-🧑‍💻 Author
+## 🧑‍💻 Author
 
-Built as a production-style AI infrastructure project using Terraform and AWS.
+Built as a **production-inspired cloud architecture project** using Terraform and AWS.
 
+The objective of this repository is to demonstrate how modern AI systems can be deployed using:
+
+- Infrastructure as Code
+- Serverless compute
+- Vector databases
+- API-driven architectures
+
+The focus is on **design decisions, deployment challenges, and real-world infrastructure patterns**, not just getting services to run.
+
+---
+
+⭐ If this project helped you or you found it interesting, feel free to give the repository a star.
