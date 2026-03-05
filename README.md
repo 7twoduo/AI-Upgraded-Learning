@@ -77,8 +77,11 @@ API --> Client[Website or Client App]
 Hosting Options
 
 S3 + Cloudfront
+<img width="1802" height="1206" alt="mermaid-diagram (1)" src="https://github.com/user-attachments/assets/ed5a01c3-cf80-4bc2-849e-2235336732ad" />
+
     &
 Ec2 Website
+<img width="1652" height="129" alt="mermaid-diagram (3)" src="https://github.com/user-attachments/assets/e1166311-a0c7-4ac2-a182-750ac09a20ec" />
 
 
 
@@ -116,17 +119,22 @@ IAM	Access control
 ✔ Optional CloudFront production hosting
 
 ⚡ Quick Deploy
+
 1️⃣ Initialize Terraform
 terraform init
+
 2️⃣ Plan Infrastructure
 terraform plan
+
 3️⃣ Deploy
 terraform apply
+
 🧪 Test the Chat API
 curl -X POST \
 https://YOUR_API_URL/chat \
 -H "Content-Type: application/json" \
 -d '{"message":"Explain my documents"}'
+
 🔐 Security Notes
 
 The project currently includes:
@@ -150,6 +158,7 @@ request validation
 tighter IAM policies
 
 Quick start
+
 1) Pre-reqs
 
 Terraform ~> 1.14.5
