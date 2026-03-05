@@ -48,7 +48,8 @@ flowchart LR
 
 Hosting Options
 
-<img width="2456" height="320" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/d19aee6a-5ea4-4e7d-8979-2483a7d51148" />
+<img width="1420" height="207" alt="image" src="https://github.com/user-attachments/assets/6a090638-e99a-4e1e-816b-71fb5f7f6fc6" />
+
 
 
 Repo layout
