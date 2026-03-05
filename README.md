@@ -45,3 +45,38 @@ flowchart LR
   E --> F[Lambda Chat Handler]
   F --> G[API Gateway /chat]
   G --> H[Frontend]
+
+Hosting Options
+
+<img width="2456" height="320" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/d19aee6a-5ea4-4e7d-8979-2483a7d51148" />
+
+
+Repo layout
+.
+├── main.tf
+├── var.tf
+├── output.tf
+├── modules/
+├── RAG_Documents/
+├── index.html
+├── lambda_function.py
+└── lambda.zip
+
+Quick start
+1) Pre-reqs
+
+Terraform ~> 1.14.5
+
+AWS provider 6.33.0
+
+AWS CLI installed + authenticated
+
+Backend bucket already exists: backend-extra-unique-1
+
+### Send me the images you want embedded
+To match your screenshots exactly, send:
+1) Your **banner** image (top header look)  
+2) Any **GIFs** you want (deploy demo, chat demo)  
+3) Any **icons/badges** you want included (HIPAA/ISO/etc. style tags)
+
+And tell me the repo name + domain you want shown, and I’ll wire it in cleanly (and make the badge rows match your style).
